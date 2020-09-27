@@ -27,7 +27,7 @@ export const querySearch: RequestHandler<{ query: string }> = (req, res) => {
 
   if (
     validator.isEmpty(query) &&
-    !validator.isInt(translator.toString(), { min: 1, max: 4 }) &&
+    !validator.isInt(translator.toString(), { min: 1, max: 4 }) ||
     !validator.isInt(page.toString(), { min: 1, max: 50 })
   ) {
     res.status(400).json("error");
@@ -67,7 +67,7 @@ export const soorahSearch: RequestHandler<{ soorah: number }> = (req, res, next)
   const translator: number = Number(req.query.t) || 1;
 
   if (
-    !validator.isInt(soorah.toString(), { min: 1, max: 114 }) &&
+    !validator.isInt(soorah.toString(), { min: 1, max: 114 }) ||
     !validator.isInt(translator.toString(), { min: 1, max: 4 })
   ) {
     res.status(400).json("error");
@@ -104,8 +104,8 @@ export const ayahSearch: RequestHandler<{ soorah: number, ayah: number }> = (req
   const translator: number = Number(req.query.t) || 1;
 
   if (
-    !validator.isInt(soorah.toString(), { min: 1, max: 114 }) &&
-    !validator.isInt(ayah.toString(), { min: 1, max: 286 }) &&
+    !validator.isInt(soorah.toString(), { min: 1, max: 114 }) ||
+    !validator.isInt(ayah.toString(), { min: 1, max: 286 }) ||
     !validator.isInt(translator.toString(), { min: 1, max: 4 })
   ) {
     res.status(400).json("error");
@@ -162,7 +162,7 @@ export const randomSearch: RequestHandler<{ limit: number, query: string }> = (r
   const query: string = req.params.query || "";
 
   if (
-    !validator.isInt(translator.toString(), { min: 1, max: 4 }) &&
+    !validator.isInt(translator.toString(), { min: 1, max: 4 }) ||
     !validator.isInt(limit.toString(), { min: 1, max: 10 })
   ) {
     res.status(400).json("error");
